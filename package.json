@@ -25,6 +25,7 @@
   "homepage": "https://github.com/kphed/soshen-crypto-whales#readme",
   "dependencies": {
     "dotenv": "^8.0.0",
+    "twitter": "^1.7.1",
     "ws": "^7.0.0"
   }
 }
