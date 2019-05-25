@@ -1,0 +1,26 @@
+{
+  "name": "soshen-crypto-whales",
+  "version": "1.0.0",
+  "description": "Real-time notifications for \"whale-sized\" cryptocurrency transactions using the sōshen and Twitter APIs.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kphed/soshen-crypto-whales.git"
+  },
+  "keywords": [
+    "blockchain",
+    "soshen",
+    "twitter",
+    "api"
+  ],
+  "author": "Khoa Phan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kphed/soshen-crypto-whales/issues"
+  },
+  "homepage": "https://github.com/kphed/soshen-crypto-whales#readme"
+}
