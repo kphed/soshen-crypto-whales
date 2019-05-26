@@ -1,9 +1,9 @@
 # Crypto  🐳 Feed
 > Real-time tweets for "whale-sized" cryptocurrency transactions using the sōshen and Twitter APIs.
 
-Live demo: https://twitter.com/soshenwhales
-Vote on the future of Crypto  🐳 Feed by following us here: https://twitter.com/soshenio
-Built using the blockchain API at https://soshen.io
+- Live demo: https://twitter.com/soshenwhales
+- Vote on the future of Crypto  🐳 Feed by following us here: https://twitter.com/soshenio
+- Built using the blockchain API at https://soshen.io
 
 ## Install Node v10.15.3 (via [nvm](https://github.com/nvm-sh/nvm))
 
