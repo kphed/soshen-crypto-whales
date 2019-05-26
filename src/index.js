@@ -6,10 +6,13 @@ require('dotenv').config()
 // NodeJS boilerplate
 // https://nodejs.org/en/docs/guides/getting-started-guide/
 const http = require('http');
-const websocket = require('./websocket');
+const {
+  hostname,
+  port,
+} = require('./config');
 
-const hostname = '127.0.0.1';
-const port = 3000;
+// Initiate WebSocket connection on app load
+require('./websocket');
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
@@ -17,6 +20,4 @@ const server = http.createServer((req, res) => {
   res.end('Goliath online.');
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+server.listen(port, hostname, () => console.log(`Server running at http://${hostname}:${port}/`));

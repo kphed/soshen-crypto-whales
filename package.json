@@ -1,10 +1,10 @@
 {
   "name": "soshen-crypto-whales",
   "version": "1.0.0",
-  "description": "Real-time notifications for \"whale-sized\" cryptocurrency transactions using the sōshen and Twitter APIs.",
+  "description": "Real-time tweets for \"whale-sized\" cryptocurrency transactions using the sōshen and Twitter APIs.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
