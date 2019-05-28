@@ -3,7 +3,7 @@ module.exports = {
   port: 3000,
   whaleTransactionMinimum: {
     // For this demo, any ADA transfer of 1M+ would be considered a whale
-    ada: 1000000,
+    ada: 2500000,
   },
   lovelaceToAdaRate: 1000000, // 1 ADA = 1,000,000 Lovelaces
   seizaExplorerTransactionUrl: 'https://seiza.com/blockchain/transaction',
