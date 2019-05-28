@@ -21,14 +21,22 @@ ws.on('open', () => messageChannels.forEach(messageChannel => ws.send(`sub ${mes
 
 ws.on('message', (message) => {
   // Parse stringified message payload
-  const { data } = JSON.parse(message);
-  const transactionAmount = convertTransactionOutputsAmountToAda(data.outputs_amount);
+  const {
+    event,
+    data,
+  } = JSON.parse(message);
 
-  // Tweet transaction only if it's larger than the ADA whale transaction minimum
-  if (transactionAmount >= whaleTransactionMinimum.ada) {
-    const formattedTransactionAmount = transactionAmount.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  if (event === 'transactionCreated') {
+    const transactionAmount = convertTransactionOutputsAmountToAda(data.outputs_amount);
 
-    // Tweet transaction amount with link to Seiza Explorer to enable transaction sleuthing
-    return tweet(`🐳 ${formattedTransactionAmount} #ADA #CARDANO\n\nTransaction: ${seizaExplorerTransactionUrl}/${data.hash}`)
+    // Tweet transaction only if it's greater than or equal to the ADA whale transaction minimum
+    if (transactionAmount >= whaleTransactionMinimum.ada) {
+      const formattedTransactionAmount = transactionAmount.toLocaleString(undefined, { maximumFractionDigits: 2 });
+      const transactionAmountString = `🐳 ${formattedTransactionAmount} #ADA #CARDANO`;
+      const transactionExplorerString = `Transaction: ${seizaExplorerTransactionUrl}/${data.hash}`;
+
+      // Tweet transaction amount with link to Seiza Explorer to enable transaction sleuthing
+      return tweet(`${transactionAmountString}\n\n${transactionExplorerString}`)
+    }
   }
 });
