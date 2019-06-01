@@ -56,14 +56,14 @@ const connectToWs = () => {
             style: 'currency',
             currency: symbols.fiat,
           });
-          const tweet = {
+          const tweetFragments = {
             crypto: `🐳 ${cryptocurrency.amount} #${symbols.crypto} #${cryptocurrency.name.toUpperCase()}`,
             fiat: `💵 ${fiat} #${symbols.fiat} ${coinMarketCap.urls.currencies}/${cryptocurrency.name.toLowerCase()}`,
             explorer: `🔎 ${seizaExplorerTransactionUrl}/${data.hash}`,
           };
 
-          // Tweet transaction amount with link to Seiza Explorer to enable transaction sleuthing
-          return tweet(`${tweet.crypto}\n${tweet.fiat}\n${tweet.explorer}`)
+          // Tweet the crypto amount, its fiat value, and a link to the Seiza Explorer for transaction sleuthing
+          return tweet(`${tweetFragments.crypto}\n${tweetFragments.fiat}\n${tweetFragments.explorer}`)
         } catch (err) {
           throw err;
         }
