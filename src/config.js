@@ -7,5 +7,10 @@ module.exports = {
   },
   lovelaceToAdaRate: 1000000, // 1 ADA = 1,000,000 Lovelaces
   seizaExplorerTransactionUrl: 'https://seiza.com/blockchain/transaction',
-  coinMarketCapLatestMarketQuote: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest',
-}
+  coinMarketCap: {
+    urls: {
+      currencies: 'https://coinmarketcap.com/currencies',
+      latestMarketQuote: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest',
+    },
+  },
+};

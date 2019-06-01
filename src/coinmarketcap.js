@@ -1,8 +1,8 @@
 const { get } = require('axios');
-const { coinMarketCapLatestMarketQuote } = require('./config');
+const { coinMarketCap } = require('./config');
 
 const getLatestMarketQuoteForSymbol = symbol => (
-  get(coinMarketCapLatestMarketQuote, {
+  get(coinMarketCap.urls.latestMarketQuote, {
     params: { symbol },
     headers: {
       'X-CMC_PRO_API_KEY': process.env.COIN_MARKET_CAP_API_KEY,
