@@ -6,7 +6,10 @@ module.exports = {
     ada: 5000000,
   },
   lovelaceToAdaRate: 1000000, // 1 ADA = 1,000,000 Lovelaces
-  seizaExplorerTransactionUrl: 'https://seiza.com/blockchain/transaction',
+  seizaExplorer: {
+    transactionUrl: 'https://seiza.com/blockchain/transaction',
+    addressUrl: 'https://seiza.com/blockchain/address',
+  },
   coinMarketCap: {
     urls: {
       currencies: 'https://coinmarketcap.com/currencies',

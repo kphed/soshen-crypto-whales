@@ -7,9 +7,15 @@ const { convertTransactionOutputsAmountToAda } = require('./util');
 const { getLatestMarketQuoteForSymbol } = require('./coinmarketcap');
 const {
   whaleTransactionMinimum,
-  seizaExplorerTransactionUrl,
+  seizaExplorer,
   coinMarketCap,
 } = require('./config');
+const top100AddressesMap = require('./top-100-addresses')
+  // Create a map for constant-time lookups of top 100 addresses
+  .reduce((accumulator, arrayValue, arrayIndex) => ({
+    ...accumulator,
+    [arrayValue]: (arrayIndex + 1),
+  }), {});
 
 const messageChannels = ['transactionCreated'];
 
@@ -43,6 +49,8 @@ const connectToWs = () => {
             crypto: 'ADA',
             fiat: 'USD',
           };
+          const transactionSenderRank = top100AddressesMap[data.inputs_address];
+          const transactionReceiverRank = top100AddressesMap[data.outputs_address];
 
           // Set nested response `data` property to `responseData` since `data` is already defined
           const { data: { data: responseData } } = await getLatestMarketQuoteForSymbol(symbols.crypto);
@@ -59,17 +67,26 @@ const connectToWs = () => {
           const tweetFragments = {
             crypto: `🐳 ${cryptocurrency.amount} #${symbols.crypto} #${cryptocurrency.name.toUpperCase()}`,
             fiat: `💵 ${fiat} #${symbols.fiat} ${coinMarketCap.urls.currencies}/${cryptocurrency.name.toLowerCase()}`,
-            explorer: `🔎 ${seizaExplorerTransactionUrl}/${data.hash}`,
+            transaction: `🔎 ${seizaExplorer.transactionUrl}/${data.hash}`,
+            ...transactionSenderRank && {
+              sender: `❗️ Sender (#${transactionSenderRank} Wealthiest ${symbols.crypto} Wallet) ${seizaExplorer.addressUrl}/${data.inputs_address}`,
+            },
+            ...transactionReceiverRank && {
+              receiver: `❗️ Receiver (#${transactionReceiverRank} Wealthiest ${symbols.crypto} Wallet) ${seizaExplorer.addressUrl}/${data.outputs_address}`,
+            },
           };
 
+          // Extract tweetFragments property values to create tweet
+          const combineTweetFragments = () => Object.values(tweetFragments).join('\n');
+
           // Tweet the crypto amount, its fiat value, and a link to the Seiza Explorer for transaction sleuthing
-          return tweet(`${tweetFragments.crypto}\n${tweetFragments.fiat}\n${tweetFragments.explorer}`)
+          return tweet(combineTweetFragments());
         } catch (err) {
           throw err;
         }
       }
     }
   });
-}
+};
 
 connectToWs();
